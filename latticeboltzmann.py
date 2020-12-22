@@ -80,7 +80,7 @@ def main():
 		
 		
 		# plot in real time - color 1/2 particles blue, other half red
-		if (plotRealTime) or (it == Nt-1):
+		if (plotRealTime and (it % 10) == 0) or (it == Nt-1):
 			plt.cla()
 			ux[cylinder] = 0
 			uy[cylinder] = 0
