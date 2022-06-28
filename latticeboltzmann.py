@@ -13,7 +13,7 @@ for an isothermal fluid
 
 
 def main():
-	""" Finite Volume simulation """
+	""" Lattice Boltzmann Simulation """
 	
 	# Simulation parameters
 	Nx                     = 400    # resolution x-dir
@@ -86,9 +86,9 @@ def main():
 			uy[cylinder] = 0
 			vorticity = (np.roll(ux, -1, axis=0) - np.roll(ux, 1, axis=0)) - (np.roll(uy, -1, axis=1) - np.roll(uy, 1, axis=1))
 			vorticity[cylinder] = np.nan
-			cmap = plt.cm.bwr
-			cmap.set_bad('black')
+			vorticity = np.ma.array(vorticity, mask=cylinder)
 			plt.imshow(vorticity, cmap='bwr')
+			plt.imshow(~cylinder, cmap='gray', alpha=0.3)
 			plt.clim(-.1, .1)
 			ax = plt.gca()
 			ax.invert_yaxis()
